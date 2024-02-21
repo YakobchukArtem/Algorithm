@@ -46,33 +46,33 @@
     <script>
         document.getElementById('okButton').removeEventListener('click', sendDataToServer);
 
-document.getElementById('okButton').addEventListener('click', function() {
-    var tableData = getTableData();
-    sendDataToServer(tableData);
-});
+        document.getElementById('okButton').addEventListener('click', function() {
+            var tableData = getTableData();
+            sendDataToServer(tableData);
+        });
 
-function createTable() {
-    var rows = document.getElementById('rows').value;
-    var columns = document.getElementById('columns').value;
-    var table = document.getElementById('table');
+        function createTable() {
+            var rows = document.getElementById('rows').value;
+            var columns = document.getElementById('columns').value;
+            var table = document.getElementById('table');
 
-    table.innerHTML = '';
-    
-    for (var i = 0; i < rows; i++) {
-        var row = document.createElement('div');
-        row.classList.add('row');
-        for (var j = 0; j < columns; j++) {
-            var cell = document.createElement('div');
-            cell.classList.add('cell');
-            cell.dataset.row = i;
-            cell.dataset.column = j;
-            cell.addEventListener('click', toggleCell);
-            row.appendChild(cell);
+            table.innerHTML = '';
+            
+            for (var i = 0; i < rows; i++) {
+                var row = document.createElement('div');
+                row.classList.add('row');
+                for (var j = 0; j < columns; j++) {
+                    var cell = document.createElement('div');
+                    cell.classList.add('cell');
+                    cell.dataset.row = i;
+                    cell.dataset.column = j;
+                    cell.addEventListener('click', toggleCell);
+                    row.appendChild(cell);
+                }
+                table.appendChild(row);
+            }
+            selectAllCells(); 
         }
-        table.appendChild(row);
-    }
-    selectAllCells(); 
-}
 
         function toggleCell() {
             this.classList.toggle('selected');
@@ -119,11 +119,10 @@ function createTable() {
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === XMLHttpRequest.DONE) {
                     if (xhr.status === 200) {
-                        console.log('Дані успішно відправлено на сервер');
                         var responseNumber = parseInt(xhr.responseText);
                         displayResponse(responseNumber); 
                     } else {
-                        console.error('Сталася помилка при відправленні даних на сервер');
+                        console.error('Something went wrong');
                     }
                 }
             };
@@ -131,19 +130,14 @@ function createTable() {
         }
 
         function displayResponse(number) {
-    // Очищення попередньої відповіді
-    var responseContainer = document.getElementById('responseContainer');
-    responseContainer.innerHTML = '';
-
-    // Додавання нової відповіді
-    var responseElement = document.createElement('div');
-    responseElement.textContent = number;
-    responseElement.style.fontSize = '24px'; 
-    responseElement.style.fontWeight = 'bold'; 
-    responseContainer.appendChild(responseElement); 
-}
-
-
+            var responseContainer = document.getElementById('responseContainer');
+            responseContainer.innerHTML = '';
+            var responseElement = document.createElement('div');
+            responseElement.textContent = number;
+            responseElement.style.fontSize = '24px'; 
+            responseElement.style.fontWeight = 'bold'; 
+            responseContainer.appendChild(responseElement); 
+        }
     </script>
 </body>
 </html>
