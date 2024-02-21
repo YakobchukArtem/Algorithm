@@ -1,0 +1,26 @@
+body {
+    background-image: url('1.jpg');
+    background-size: auto; 
+    background-position: center; 
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+#table {
+    display: flex;
+    flex-wrap: wrap;
+    width: auto;
+    flex-direction: row;
+}
+
+.cell {
+    width: 50px;
+    height: 50px;
+    border: 1px solid black;
+    background-color: lightgray;
+    cursor: pointer;
+}
+
+.cell.selected {
+    background-color: lightblue;
+}
